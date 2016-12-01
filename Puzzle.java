@@ -1,26 +1,41 @@
 public class Puzzle 
 {
+	
+	/*Creating int arrays to hold the inputs for the puzzle and the goal state.*/
 	private int[] puzzle;
 	private int[] end;
+	/*Create an array of puzzles that will....*/
 	private Puzzle[] children = null;
-	private int distance;// manhattan distance to goal // how many moves at a
-						// minimum it takes to reach the goal.
+	
+	/*This is the manhattan distance to the goal state and the minimum number of moves it
+	 will take to reach the expected goal state*/
+	private int distance;
+	
 	private int previous = -1;
 	private int zeroLocation;
 	private int allMovements;
-	private Puzzle parentPuzzle;// needed for the output of the correct order
-
+	
+	/*This puzzle will holds the correct order for display*/
+	private Puzzle parentPuzzle;
+	
+	
+	/*The constructor for the first itteration of the project. It will intialize all ...*/
 	public Puzzle(int[] puzzle, int[] end, int last, Puzzle parentPuzzle, int moves) 
 	{
+		//Creates instance of the puzzle object
 		this.parentPuzzle = parentPuzzle;
 		this.previous = last;
 		this.allMovements = moves;
 		this.puzzle = new int[puzzle.length];
 		this.end = new int[end.length];
+		
+		//For loop supplies values to int arrays from inputs 
 		for (int i = 0; i < puzzle.length; i++) {
 			this.puzzle[i] = puzzle[i];
 			this.end[i] = end[i];
 		}
+		
+		/*manhattan is currently set to 0*/
 		distance = 0;
 		for (int i = 0; i < puzzle.length; i++) {
 			if (puzzle[i] != 0) {
@@ -36,6 +51,8 @@ public class Puzzle
 		}
 	}
 
+	
+	
 	public Puzzle(int[] puzzle, int[] end) 
 	{
 		this.allMovements = 0;
@@ -65,9 +82,17 @@ public class Puzzle
 		}
 	}
 
+	
+	
+	
 	public int[] getNeighborPiece(int x) 
 	{
 		int[] a = null;
+		
+		/*Switch Cases are used to determine which pieces are used
+		 to determine the current neighbors while in the current state. We
+		 pass an integer value to which set of values to assign to array a.*/
+		
 		switch (x) 
 		{
 			case 0:
@@ -100,12 +125,17 @@ public class Puzzle
 		}
 		return a;
 	}
+	
+	
+	
+	/*Method checks if there are any children of the... */
 
 	public Puzzle[] showChildren() 
 	{
+		/*Checks if there exsists any children*/
 		if (!hasChildren()) 
 		{
-			int[] neighbors = null;// = getNextTo()
+			int[] neighbors = null;
 			for (int i = 0; i < puzzle.length; i++) 
 			{
 				if (puzzle[i] == 0) {
@@ -154,7 +184,9 @@ public class Puzzle
 		}
 		return children;
 	}
-
+	
+	/*Return methods*/
+	
 	public int getAllMovements() 
 	{
 		return allMovements;
@@ -176,7 +208,12 @@ public class Puzzle
 				+ puzzle[5] + "\n" + puzzle[6] + " " + puzzle[7] + " " + puzzle[8] + "\n";
 		return puzzleString;
 	}
-
+	
+	
+	/*Checks to the puzzle to see for values in puzzle array
+	  that do not equal the expected goal state values and returns
+	  true or false.
+	*/
 	public boolean checkPuzzle() 
 	{
 		for (int i = 0; i < puzzle.length; i++) 
@@ -189,6 +226,9 @@ public class Puzzle
 		return true;
 	}
 
+	
+	
+	/*Checks to see if there exists any children and returns a boolean value*/
 	public boolean hasChildren() 
 	{
 		if (children == null) 
@@ -200,6 +240,8 @@ public class Puzzle
 		}
 	}
 	
+	
+	/*Checks to see current state is the expected goal state*/
 	public static boolean isSolution(int[] puzzle, int[] goal) 
 	{
 		int puzzleInversions = 0, goalInversions = 0;
