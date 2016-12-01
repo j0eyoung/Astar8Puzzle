@@ -1,16 +1,16 @@
 
-public class Puzzle 
+public class puzzle 
 {
 	private int[] puzzle;
 	private int[] end;
-	private Puzzle[] children = null;
+	private puzzle[] children = null;
 	private int distance;
 	private int previous = -1;
 	private int locZero;
 	private int allMovements;
-	private Puzzle parentPuzzle;
+	private puzzle parentPuzzle;
 
-	public Puzzle(int[] puzzle, int[] end, int last, Puzzle parentPuzzle, int moves) 
+	public puzzle(int[] puzzle, int[] end, int last, puzzle parentPuzzle, int moves) 
 	{
 		this.parentPuzzle = parentPuzzle;
 		this.previous = last;
@@ -40,7 +40,7 @@ public class Puzzle
 		}
 	}
 	
-	public Puzzle(int[] puzzle, int[] end) 
+	public puzzle(int[] puzzle, int[] end) 
 	{
 		this.allMovements = 0;
 		this.puzzle = new int[puzzle.length];
@@ -105,7 +105,7 @@ public class Puzzle
 		return a;
 	}
 
-	public Puzzle[] showChildren() 
+	public puzzle[] showChildren() 
 	{
 		if (!hasChildren()) 
 		{
@@ -132,8 +132,8 @@ public class Puzzle
 					break;
 				}
 			}
-			children = new Puzzle[neighbors.length];
-			PuzzleGroup puzzleGroup = PuzzleGroup.getOccurrence();
+			children = new puzzle[neighbors.length];
+			puzzleFamily puzzleGroup = puzzleFamily.getOccurrence();
 			for (int i = 0; i < children.length; i++) 
 			{
 				int[] array = new int[puzzle.length];
@@ -150,7 +150,7 @@ public class Puzzle
 						array[j] = puzzle[j];
 					}
 				}
-				children[i] = new Puzzle(array, end, locZero, this, allMovements + 1);
+				children[i] = new puzzle(array, end, locZero, this, allMovements + 1);
 				puzzleGroup.addPuzzle(children[i]);
 
 			}
@@ -225,7 +225,7 @@ public class Puzzle
 		return distance;
 	}
 
-	public Puzzle getParentPuzzle() 
+	public puzzle getParentPuzzle() 
 	{
 		return parentPuzzle;
 	}

@@ -1,16 +1,16 @@
 import java.util.LinkedList;
 import java.util.ArrayList;
 
-public class PuzzleGroup 
+public class puzzleFamily 
 {
 	private int start = 0;
 	private int current = 0;
-	private static PuzzleGroup firstP = null;	
-	private ArrayList<LinkedList<Puzzle>> puzzles = new ArrayList<LinkedList<Puzzle>>(300);
+	private static puzzleFamily firstP = null;	
+	private ArrayList<LinkedList<puzzle>> puzzles = new ArrayList<LinkedList<puzzle>>(300);
 	
-	private PuzzleGroup() {}
+	private puzzleFamily() {}
 	
-	public Puzzle next() 
+	public puzzle next() 
 	{
 		while (puzzles.get(current).isEmpty()) 
 		{
@@ -21,21 +21,21 @@ public class PuzzleGroup
 	}
 	
 
-	public static PuzzleGroup getOccurrence() 
+	public static puzzleFamily getOccurrence() 
 	{
 		if (firstP == null) 
 		{
-			firstP = new PuzzleGroup();
+			firstP = new puzzleFamily();
 		}
 		return firstP;
 	}
 
-	public void addPuzzle(Puzzle puzzle) 
+	public void addPuzzle(puzzle puzzle) 
 	{
 		int f = puzzle.getWeight() + puzzle.getAllMovements();
 		while (puzzles.size() <= f - start) 
 		{
-			puzzles.add(new LinkedList<Puzzle>());
+			puzzles.add(new LinkedList<puzzle>());
 		}
 
 		puzzles.get(f - start).add(puzzle);

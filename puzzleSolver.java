@@ -4,9 +4,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 
-public class PuzzleMain 
+public class puzzleSolver 
 {
-	public static void PuzzleMain(String[] args){
+	public static void puzzleSolver(String[] args){
 		double startTime = System.currentTimeMillis();
 		int[] initialState = new int[9];
 		int[] goalState = new int[9];
@@ -47,7 +47,7 @@ public class PuzzleMain
 					}	
 				} catch (IOException exp) {}
 			}
-			PuzzleGroup firstPuzzle = PuzzleGroup.getOccurrence();
+			puzzleFamily firstPuzzle = puzzleFamily.getOccurrence();
 			int[] startTemp = new int[initialState.length - 1];
 			int[] goal = new int[goalState.length - 1];
 			int temp2 = 0;
@@ -70,12 +70,12 @@ public class PuzzleMain
 				}
 			}
 
-			if (Puzzle.isSolution(startTemp, goal)) 
+			if (puzzle.isSolution(startTemp, goal)) 
 			{
-				Puzzle startPuzzle = new Puzzle(initialState, goalState);
+				puzzle startPuzzle = new puzzle(initialState, goalState);
 				firstPuzzle.setBeginning(startPuzzle.getWeight());
 				firstPuzzle.addPuzzle(startPuzzle);
-				Puzzle afterPuzzle = firstPuzzle.next();
+				puzzle afterPuzzle = firstPuzzle.next();
 				boolean isComplete = false;
 				while (isComplete == false) 
 				{
