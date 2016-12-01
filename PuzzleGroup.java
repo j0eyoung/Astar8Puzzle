@@ -34,6 +34,7 @@ public class PuzzleGroup
 	}
 
 	
+	/*Add the puzzle to the list*/
 	public void addPuzzle(Puzzle puzzle) 
 	{
 		int f = puzzle.getWeight() + puzzle.getAllMovements();
