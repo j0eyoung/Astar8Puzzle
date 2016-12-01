@@ -1,14 +1,14 @@
+
 public class Puzzle 
 {
 	private int[] puzzle;
 	private int[] end;
 	private Puzzle[] children = null;
-	private int distance;// manhattan distance to goal // how many moves at a
-						// minimum it takes to reach the goal.
+	private int distance;
 	private int previous = -1;
-	private int zeroLocation;
+	private int locZero;
 	private int allMovements;
-	private Puzzle parentPuzzle;// needed for the output of the correct order
+	private Puzzle parentPuzzle;
 
 	public Puzzle(int[] puzzle, int[] end, int last, Puzzle parentPuzzle, int moves) 
 	{
@@ -17,25 +17,29 @@ public class Puzzle
 		this.allMovements = moves;
 		this.puzzle = new int[puzzle.length];
 		this.end = new int[end.length];
-		for (int i = 0; i < puzzle.length; i++) {
+		for (int i = 0; i < puzzle.length; i++) 
+		{
 			this.puzzle[i] = puzzle[i];
 			this.end[i] = end[i];
 		}
 		distance = 0;
-		for (int i = 0; i < puzzle.length; i++) {
+		for (int i = 0; i < puzzle.length; i++) 
+		{
 			if (puzzle[i] != 0) {
-				for (int j = 0; j < end.length; j++) {
-					if (puzzle[i] == end[j]) {
+				for (int j = 0; j < end.length; j++) 
+				{
+					if (puzzle[i] == end[j]) 
+					{
 						distance += Math.abs(i % 3 - j % 3) + Math.abs(i / 3 - j / 3);
 						break;
 					}
 				}
 			} else {
-				zeroLocation = i;
+				locZero = i;
 			}
 		}
 	}
-
+	
 	public Puzzle(int[] puzzle, int[] end) 
 	{
 		this.allMovements = 0;
@@ -60,11 +64,11 @@ public class Puzzle
 				}
 			} else 
 			{
-				zeroLocation = i;
+				locZero = i;
 			}
 		}
 	}
-
+	
 	public int[] getNeighborPiece(int x) 
 	{
 		int[] a = null;
@@ -105,7 +109,7 @@ public class Puzzle
 	{
 		if (!hasChildren()) 
 		{
-			int[] neighbors = null;// = getNextTo()
+			int[] neighbors = null;
 			for (int i = 0; i < puzzle.length; i++) 
 			{
 				if (puzzle[i] == 0) {
@@ -138,7 +142,7 @@ public class Puzzle
 					if (j == neighbors[i]) 
 					{
 						array[j] = 0;
-					} else if (j == zeroLocation) 
+					} else if (j == locZero) 
 					{
 						array[j] = puzzle[neighbors[i]];
 					} else 
@@ -146,35 +150,13 @@ public class Puzzle
 						array[j] = puzzle[j];
 					}
 				}
-				children[i] = new Puzzle(array, end, zeroLocation, this, allMovements + 1);
+				children[i] = new Puzzle(array, end, locZero, this, allMovements + 1);
 				puzzleGroup.addPuzzle(children[i]);
 
 			}
 
 		}
 		return children;
-	}
-
-	public int getAllMovements() 
-	{
-		return allMovements;
-	}
-
-	public int getWeight() 
-	{
-		return distance;
-	}
-
-	public Puzzle getParentPuzzle() 
-	{
-		return parentPuzzle;
-	}
-
-	public String getPuzzle() 
-	{
-		String puzzleString = "" + puzzle[0] + " " + puzzle[1] + " " + puzzle[2] + "\n" + puzzle[3] + " " + puzzle[4] + " "
-				+ puzzle[5] + "\n" + puzzle[6] + " " + puzzle[7] + " " + puzzle[8] + "\n";
-		return puzzleString;
 	}
 
 	public boolean checkPuzzle() 
@@ -188,22 +170,10 @@ public class Puzzle
 		}
 		return true;
 	}
-
-	public boolean hasChildren() 
-	{
-		if (children == null) 
-		{
-			return false;
-		} else 
-		{
-			return true;
-		}
-	}
 	
 	public static boolean isSolution(int[] puzzle, int[] goal) 
 	{
 		int puzzleInversions = 0, goalInversions = 0;
-
 		for (int i = 0; i < puzzle.length; i++) {
 			for (int j = i + 1; j < goal.length; j++) 
 			{
@@ -225,5 +195,38 @@ public class Puzzle
 			System.out.println("no solution");
 			return false;
 		}
+	}
+	
+	public String getPrintablePuzzle() 
+	{
+		String puzzleString = "*********"+"\n" + "* " + puzzle[0] + " " + puzzle[1] + " " + puzzle[2] + " *" + "\n" + "* " + puzzle[3] + " " + puzzle[4] + " "
+				+ puzzle[5] + " *" + "\n" + "* " + puzzle[6] +  " " + puzzle[7] + " " + puzzle[8] + " *" + "\n" + "*********";
+		return puzzleString;
+	}
+	
+	public boolean hasChildren() 
+	{
+		if (children == null) 
+		{
+			return false;
+		} else 
+		{
+			return true;
+		}
+	}
+	
+	public int getAllMovements() 
+	{
+		return allMovements;
+	}
+
+	public int getWeight() 
+	{
+		return distance;
+	}
+
+	public Puzzle getParentPuzzle() 
+	{
+		return parentPuzzle;
 	}
 }
