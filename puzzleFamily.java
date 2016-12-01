@@ -10,6 +10,8 @@ public class puzzleFamily
 	
 	private puzzleFamily() {}
 	
+	/*Loops until it finds the next availble puzzle*/
+	
 	public puzzle next() 
 	{
 		while (puzzles.get(current).isEmpty()) 
@@ -21,6 +23,8 @@ public class puzzleFamily
 	}
 	
 
+	/*Checks if the firstP already exists.If it doesn't, it intializes it.*/
+	
 	public static puzzleFamily getOccurrence() 
 	{
 		if (firstP == null) 
@@ -30,6 +34,8 @@ public class puzzleFamily
 		return firstP;
 	}
 
+	/*Add the puzzle to the list*/
+	
 	public void addPuzzle(puzzle puzzle) 
 	{
 		int f = puzzle.getWeight() + puzzle.getAllMovements();
@@ -42,6 +48,7 @@ public class puzzleFamily
 
 	}
 	
+	/*Sets start location to passed Manhattan Distance value*/
 	public void setBeginning(int manDistance) 
 	{
 		this.start = manDistance;
