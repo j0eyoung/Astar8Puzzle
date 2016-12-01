@@ -17,6 +17,9 @@ public class puzzleSolver
 			file = new File(args[temp]);
 			temp++;
 			BufferedReader buffered = null;
+			
+			/*Reading in inputs from command line*/
+			
 			try 
 			{
 				String line;
@@ -47,7 +50,10 @@ public class puzzleSolver
 					}	
 				} catch (IOException exp) {}
 			}
+			
+			/*Checks and creates instance of the first puzzle*/
 			puzzleFamily firstPuzzle = puzzleFamily.getOccurrence();
+			
 			int[] startTemp = new int[initialState.length - 1];
 			int[] goal = new int[goalState.length - 1];
 			int temp2 = 0;
@@ -70,6 +76,13 @@ public class puzzleSolver
 				}
 			}
 
+			/*
+			*	If the current state is the same is the goal state the the below code executes, printing 
+			*	out the state after each movement and then it prints the amount of moves it takes and the amount of
+			*	time in millisenonds  that it takes to execute.
+			*/
+			
+			
 			if (puzzle.isSolution(startTemp, goal)) 
 			{
 				puzzle startPuzzle = new puzzle(initialState, goalState);
@@ -116,6 +129,10 @@ public class puzzleSolver
 				}
 			}
 		}
+		
+		/*Displaying time results*/
+		
+		
 		double endTime = System.currentTimeMillis();
 		double totalRuntime = endTime - startTime;
 		System.out.println("***************************************************");
@@ -124,6 +141,5 @@ public class puzzleSolver
 		System.out.println();
 	
 	}
-	//Changed all this - Edwin
 	
 }
