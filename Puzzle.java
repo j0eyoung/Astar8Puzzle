@@ -35,7 +35,7 @@ public class Puzzle
 			this.end[i] = end[i];
 		}
 		
-		/*manhattan is currently set to 0*/
+		/*Manhattan is currently set to 0*/
 		distance = 0;
 		for (int i = 0; i < puzzle.length; i++) {
 			if (puzzle[i] != 0) {
@@ -91,7 +91,7 @@ public class Puzzle
 		
 		/*Switch Cases are used to determine which pieces are used
 		 to determine the current neighbors while in the current state. We
-		 pass an integer value to which set of values to assign to array a.*/
+		 pass an integer value to which set of values to assign to a and return it.*/
 		
 		switch (x) 
 		{
@@ -128,11 +128,16 @@ public class Puzzle
 	
 	
 	
-	/*Method checks if there are any children of the... */
+	
 
 	public Puzzle[] showChildren() 
 	{
-		/*Checks if there exsists any children*/
+		/*First check if there are any exisiting children and if there are none,
+	 	get the neighbor pieces from the getNeighborPiece function and assign it to neighbors int array. 
+	 	If children exists then assign neighbors to a temporary array and check to see if any of the
+	 	neighbors have been previously visited. Add only the neighbors that have not been previously visited.
+	 	*/
+		
 		if (!hasChildren()) 
 		{
 			int[] neighbors = null;
@@ -158,8 +163,25 @@ public class Puzzle
 					break;
 				}
 			}
+			
 			children = new Puzzle[neighbors.length];
 			PuzzleGroup puzzleGroup = PuzzleGroup.getOccurrence();
+			
+			/*
+			* The first loop iterates the index of the values in the
+			* neighbors array while the second loop interates the index of the new
+			* array. Then check if j is the same value of the the neighbor value held at index 
+			* i, if it matches then set the newly created array's value at index j to 0. 
+			*
+			* If j is the zero location then set the array's value to the puzzle value at the
+			* index of neighbors[i]'s value.
+			*
+			* If none of the above then, set the array at index j value to the current puzzle value
+			* at index j.
+			*/
+			
+			
+			
 			for (int i = 0; i < children.length; i++) 
 			{
 				int[] array = new int[puzzle.length];
@@ -241,7 +263,7 @@ public class Puzzle
 	}
 	
 	
-	/*Checks to see current state is the expected goal state*/
+	
 	public static boolean isSolution(int[] puzzle, int[] goal) 
 	{
 		int puzzleInversions = 0, goalInversions = 0;
