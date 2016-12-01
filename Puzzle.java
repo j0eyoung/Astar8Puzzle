@@ -38,6 +38,14 @@ public class Puzzle
 		
 		/*Manhattan is currently set to 0*/
 		distance = 0;
+		
+		
+		/* The first loop iterates the indexes of puzzle values and the second
+		* iterates the indexs of end values. If the value is the same at both indexes, 
+		* calculate the distance. If they are not the same , then set the the blank space
+		* to i.
+		*/
+		
 		for (int i = 0; i < puzzle.length; i++) {
 			if (puzzle[i] != 0) {
 				for (int j = 0; j < end.length; j++) {
@@ -239,7 +247,8 @@ public class Puzzle
 	/*Checks to the puzzle to see for values in puzzle array
 	 * that do not equal the expected goal state values and returns
 	 *true or false.
-	*/
+	 */
+	
 	public boolean checkPuzzle() 
 	{
 		for (int i = 0; i < puzzle.length; i++) 
