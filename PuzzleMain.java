@@ -13,6 +13,8 @@ public class PuzzleMain
 		int[] initialState = new int[9];
 		int[] goalState = new int[9];
 		int temp = 0;
+		
+		/*Reading in inputs from command line*/
 		File file = null;
 		while (temp < args.length) 
 		{
@@ -51,12 +53,15 @@ public class PuzzleMain
 				} catch (IOException exp) {}
 			}
 
+			/*Checks and creates instance of the first puzzle*/
 			PuzzleGroup firstPuzzle = PuzzleGroup.getOccurrence();
 
 			int[] startTemp = new int[initialState.length - 1];
 			int[] goal = new int[goalState.length - 1];
 			int temp2 = 0;
 			int temp3 = 0;
+			
+			
 			for (int i = 0; i < initialState.length; i++) 
 			{
 				if (initialState[i] == 0) 
@@ -116,6 +121,8 @@ public class PuzzleMain
 				}
 			}
 		}
+		
+		/*Displaying time*/
 		double endTime = System.currentTimeMillis();
 		double totalRuntime = endTime - startTime;
 		System.out.println("The puzzle was solved in: " + totalRuntime + " Milliseconds.");
