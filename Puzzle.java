@@ -1,10 +1,11 @@
 public class Puzzle 
 {
 	
-	/*Creating int arrays to hold the inputs for the puzzle and the goal state.*/
+	/*Creating int arrays to hold the inputs for the puzzle and the expected end state.*/
 	private int[] puzzle;
 	private int[] end;
-	/*Create an array of puzzles that will....*/
+	
+	/*Create an array of puzzles that will hold the children*/
 	private Puzzle[] children = null;
 	
 	/*This is the manhattan distance to the goal state and the minimum number of moves it
@@ -19,17 +20,17 @@ public class Puzzle
 	private Puzzle parentPuzzle;
 	
 	
-	/*The constructor for the first itteration of the project. It will intialize all ...*/
+	
 	public Puzzle(int[] puzzle, int[] end, int last, Puzzle parentPuzzle, int moves) 
 	{
-		//Creates instance of the puzzle object
+		/*Creates instance of the puzzle object*/
 		this.parentPuzzle = parentPuzzle;
 		this.previous = last;
 		this.allMovements = moves;
 		this.puzzle = new int[puzzle.length];
 		this.end = new int[end.length];
 		
-		//For loop supplies values to int arrays from inputs 
+		/*For loop supplies values to int arrays from inputs*/
 		for (int i = 0; i < puzzle.length; i++) {
 			this.puzzle[i] = puzzle[i];
 			this.end[i] = end[i];
@@ -90,8 +91,9 @@ public class Puzzle
 		int[] a = null;
 		
 		/*Switch Cases are used to determine which pieces are used
-		 to determine the current neighbors while in the current state. We
-		 pass an integer value to which set of values to assign to a and return it.*/
+		 *to determine the current neighbors while in the current state. We
+		 *pass an integer value to which set of values to assign to a and return it.
+		 */
 		
 		switch (x) 
 		{
@@ -133,9 +135,10 @@ public class Puzzle
 	public Puzzle[] showChildren() 
 	{
 		/*First check if there are any exisiting children and if there are none,
-	 	get the neighbor pieces from the getNeighborPiece function and assign it to neighbors int array. 
-	 	If children exists then assign neighbors to a temporary array and check to see if any of the
-	 	neighbors have been previously visited. Add only the neighbors that have not been previously visited.
+	 	*get the neighbor pieces from the getNeighborPiece function and assign it to neighbors int array. 
+		*
+	 	*If children exists then assign neighbors to a temporary array and check to see if any of the
+	 	*neighbors have been previously visited. Add only the neighbors that have not been previously visited.
 	 	*/
 		
 		if (!hasChildren()) 
@@ -171,7 +174,8 @@ public class Puzzle
 			* The first loop iterates the index of the values in the
 			* neighbors array while the second loop interates the index of the new
 			* array. Then check if j is the same value of the the neighbor value held at index 
-			* i, if it matches then set the newly created array's value at index j to 0. 
+			* i. 
+			* If it matches then set the newly created array's value at index j to 0. 
 			*
 			* If j is the zero location then set the array's value to the puzzle value at the
 			* index of neighbors[i]'s value.
@@ -233,8 +237,8 @@ public class Puzzle
 	
 	
 	/*Checks to the puzzle to see for values in puzzle array
-	  that do not equal the expected goal state values and returns
-	  true or false.
+	 * that do not equal the expected goal state values and returns
+	 *true or false.
 	*/
 	public boolean checkPuzzle() 
 	{
@@ -263,7 +267,7 @@ public class Puzzle
 	}
 	
 	
-	
+	/*****/
 	public static boolean isSolution(int[] puzzle, int[] goal) 
 	{
 		int puzzleInversions = 0, goalInversions = 0;
