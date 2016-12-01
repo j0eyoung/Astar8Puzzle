@@ -1,28 +1,52 @@
 
 public class puzzle 
 {
+	
+	/*Creating int arrays to hold the inputs for the puzzle and the expected end state.*/
 	private int[] puzzle;
 	private int[] end;
+	
+	/*Create an array of puzzles that will hold the children*/
 	private puzzle[] children = null;
+	
+	/*This is the manhattan distance to the goal state and the minimum number of moves it
+	 will take to reach the expected goal state*/
+	
 	private int distance;
 	private int previous = -1;
 	private int locZero;
 	private int allMovements;
+	
+	/*This puzzle will holds the correct order for display*/
 	private puzzle parentPuzzle;
 
+	
+	/*Used only when the puzzle is first created*/
 	public puzzle(int[] puzzle, int[] end, int last, puzzle parentPuzzle, int moves) 
 	{
+		/*Creates instance of the puzzle object*/
 		this.parentPuzzle = parentPuzzle;
 		this.previous = last;
 		this.allMovements = moves;
 		this.puzzle = new int[puzzle.length];
 		this.end = new int[end.length];
+		
+		/*For loop supplies values to int arrays from inputs*/
 		for (int i = 0; i < puzzle.length; i++) 
 		{
 			this.puzzle[i] = puzzle[i];
 			this.end[i] = end[i];
 		}
+		
+		/*Manhattan is currently set to 0*/
 		distance = 0;
+		
+		/* The first loop iterates the indexes of puzzle values and the second
+		* iterates the indexs of end values. If the value is the same at both indexes, 
+		* calculate the distance. If they are not the same , then set the the blank space
+		* to i.
+		*/
+		
 		for (int i = 0; i < puzzle.length; i++) 
 		{
 			if (puzzle[i] != 0) {
@@ -69,9 +93,17 @@ public class puzzle
 		}
 	}
 	
+	
+	
 	public int[] getNeighborPiece(int x) 
 	{
 		int[] a = null;
+		
+		/*Switch Cases are used to determine which pieces are used
+		 *to determine the current neighbors while in the current state. We
+		 *pass an integer value to which set of values to assign to a and return it.
+		 */
+		
 		switch (x) 
 		{
 			case 0:
@@ -107,6 +139,14 @@ public class puzzle
 
 	public puzzle[] showChildren() 
 	{
+		/*First check if there are any exisiting children and if there are none,
+	 	*get the neighbor pieces from the getNeighborPiece function and assign it to neighbors int array. 
+		*
+	 	*If children exists then assign neighbors to a temporary array and check to see if any of the
+	 	*neighbors have been previously visited. Add only the neighbors that have not been previously visited.
+	 	*/
+		
+		
 		if (!hasChildren()) 
 		{
 			int[] neighbors = null;
@@ -132,8 +172,28 @@ public class puzzle
 					break;
 				}
 			}
+			
+			
+			
+			
 			children = new puzzle[neighbors.length];
 			puzzleFamily puzzleGroup = puzzleFamily.getOccurrence();
+			
+			/*
+			* The first loop iterates the index of the values in the
+			* neighbors array while the second loop interates the index of the new
+			* array. Then check if j is the same value of the the neighbor value held at index 
+			* i. 
+			* If it matches then set the newly created array's value at index j to 0. 
+			*
+			* If j is the zero location then set the array's value to the puzzle value at the
+			* index of neighbors[i]'s value.
+			*
+			* If none of the above then, set the array at index j value to the current puzzle value
+			* at index j.
+			*/
+			
+			
 			for (int i = 0; i < children.length; i++) 
 			{
 				int[] array = new int[puzzle.length];
@@ -158,6 +218,11 @@ public class puzzle
 		}
 		return children;
 	}
+	
+	/* Checks the puzzle to see for values in puzzle array
+	 * that do not equal the expected goal state values and returns
+	 * true or false.
+	 */
 
 	public boolean checkPuzzle() 
 	{
@@ -170,6 +235,10 @@ public class puzzle
 		}
 		return true;
 	}
+	
+	/*
+	* Checks to see if a solution exisits for the current puzzle.
+	*/
 	
 	public static boolean isSolution(int[] puzzle, int[] goal) 
 	{
@@ -197,6 +266,7 @@ public class puzzle
 		}
 	}
 	
+	/*Stores puzzle in a string variable and returns it*/
 	public String getPrintablePuzzle() 
 	{
 		String puzzleString = "*********"+"\n" + "* " + puzzle[0] + " " + puzzle[1] + " " + puzzle[2] + " *" + "\n" + "* " + puzzle[3] + " " + puzzle[4] + " "
@@ -204,6 +274,7 @@ public class puzzle
 		return puzzleString;
 	}
 	
+	/*Checks to see if there exists any children and returns a boolean value*/
 	public boolean hasChildren() 
 	{
 		if (children == null) 
@@ -214,6 +285,11 @@ public class puzzle
 			return true;
 		}
 	}
+	
+	
+	/*Return methods for the movements, weights,
+	* and parentPuzzle
+	*/
 	
 	public int getAllMovements() 
 	{
