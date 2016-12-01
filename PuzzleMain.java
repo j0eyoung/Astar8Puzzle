@@ -21,6 +21,9 @@ public class PuzzleMain
 			file = new File(args[temp]);
 			temp++;
 			BufferedReader buffered = null;
+			
+			/*Reading in inputs from command line*/
+			
 			try 
 			{
 				String line;
@@ -61,6 +64,9 @@ public class PuzzleMain
 			int temp2 = 0;
 			int temp3 = 0;
 			
+			
+			
+			/**/
 			
 			for (int i = 0; i < initialState.length; i++) 
 			{
